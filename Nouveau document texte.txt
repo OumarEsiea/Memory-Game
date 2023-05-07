@@ -1,0 +1,200 @@
+body {
+    background-color:orange;
+    font-family: Arial, sans-serif;
+}
+
+main {
+    background-color: lightgray;
+    padding: 10px;
+}
+
+section{
+    background-color: white;
+    border-radius: 20px;
+    padding: 5px;
+}
+
+h1 {
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2em;
+}
+
+.flex-container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    padding: 0;
+    list-style: none;
+    margin-bottom: 50px;
+}
+
+.flex-item {
+    background: orange;
+    padding: 5px;
+    width: 200px;
+    height: 150px;
+    margin-top: 10px;
+    line-height: 150px;
+    color: white;
+    border-radius: 8px;
+}
+
+img {
+    display: block;
+    margin: auto;
+    width: 100%;
+}
+
+.toolbar {
+    text-align: center;
+    padding: 10px;
+}
+
+footer{
+    color: white;
+    text-align: center;
+    padding-top: 20px;
+    font-weight: bold;
+}
+.container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    padding: 0;
+    list-style: none;
+    margin-bottom: 50px;
+}
+
+.Image {
+    background: orange;
+    padding: 5px;
+    width: 200px;
+    height: 150px;
+    margin-top: 10px;
+    line-height: 150px;
+    color: white;
+    border-radius: 8px;
+}
+
+-----------------------------------------------------------------------------------------
+Code JS
+
+for (let i = 0; i<this.size; i++){
+        do{
+            rand = Math.floor(Math.random() * 18) + 1;
+        }while(this.images.includes(`../Image/${tab}.png`));
+        this.images.push(`../Image/${tab}.png`);
+        this.images.push(`../Image/${tab}.png`);   
+    }
+let tab = [];
+    for (let i = 0; i<this.size; i++){
+        tab[i] = `Image${i}`;
+        tab.push(i);
+        tab[i] = `Image${i}`;
+        tab.push(i);   
+    }
+    console.log(tab)
+
+class Memory_Game{
+
+constructor(size){
+    this.size = size;
+    this.cards = this.Init();
+    this.tab = tab;
+    this.images = this.images;
+}
+
+Init(){
+    let tab;
+    for (let i = 0; i<this.size; i++){
+        do{
+            rand = Math.floor(Math.random() * 18) + 1;
+        }while(this.images.includes(`../Image/${tab}.png`));
+        this.images.push(`../Image/${tab}.png`);
+        this.images.push(`../Image/${tab}.png`);   
+    }
+    console.log(tab)
+}
+
+Shuffle(){
+    var i, j, tmp;
+    for (i = tab.length - 1; i > 0; i--) {
+        j = Math.floor(Math.random() * (i + 1));
+        tmp = tab[i];
+        tab[i] = tab[j];
+        tab[j] = tmp;
+    }
+    return tab;
+}
+
+Play(){
+
+}
+
+Hidden(){}
+
+}```
+
+function reload(){
+
+    for(let i = 0; i<20; i++){
+        let rand = Math.floor(Math.random() * 21) + 1;
+        const image = document.getElementById(`Image${i}`);
+        image.src = `${rand}.jpg`;
+    }
+}
+-----------------------------------------------------------------------------------------
+Code HTML
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <script src="Memo.js"></script>
+    <link rel="stylesheet" href="Memo.css">
+    <title>Memory Game</title>
+</head>
+<body>
+    <div class="toolbar">
+        <ul>
+        <li><button onclick ="Reload()">Recharger</button></li>    
+        <li><button onclick ="Init()">Init</button></li>
+        <li><button onclick ="Shuffle()">Shuffle</button></li>
+        <li><button onclick ="Play()">Play</button></li>  
+        <li><button onclick ="Hide()">Hide</button></li>   
+        </ul>
+    </div>
+	<main>
+		<section>
+			<h1>Memory Game</h1>
+			<ul class="flex-container">
+				<li class="Image"><img id="Image0"></li>
+                <li class="Image"><img id="Image1"></li>
+                <li class="Image"><img id="Image2"></li>
+                <li class="Image"><img id="Image3"></li>
+                <li class="Image"><img id="Image4"></li>
+                <li class="Image"><img id="Image5"></li>
+                <li class="Image"><img id="Image6"></li>
+                <li class="Image"><img id="Image7"></li>
+                <li class="Image"><img id="Image8"></li>
+                <li class="Image"><img id="Image9"></li>
+                <li class="Image"><img id="Image10"></li>
+                <li class="Image"><img id="Image11"></li>
+                <li class="Image"><img id="Image12"></li>
+                <li class="Image"><img id="Image13"></li>
+                <li class="Image"><img id="Image14"></li>
+                <li class="Image"><img id="Image15"></li>
+                <li class="Image"><img id="Image16"></li>
+                <li class="Image"><img id="Image17"></li>
+                <li class="Image"><img id="Image18"></li>
+                <li class="Image"><img id="Image19"></li>
+                <li class="Image"><img id="Image20"></li>
+			</ul>
+		</section>
+	</main>
+	<footer>ESIEA 2023</footer>
+</body>
+</html>
