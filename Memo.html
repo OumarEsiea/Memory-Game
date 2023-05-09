@@ -7,15 +7,15 @@
     <title>Memory Game</title>
 </head>
 <body>
-    </div>
 	<main>
 		<section>
 			<h1>Memory Game</h1>
+            <input id="size" type="text" required maxlength="1" size="5">
 			<div class = "toolbar">
                 <ul>
-                <li><button onclick ="startGame(6)">Play</button></li>  
-                <li><button onclick ="HiddenGame(6)">Hide</button></li>
-                <li><button onclick="reloadGame(6)">Restart</button></li>   
+                <li><button onclick ="startGame()">Play</button></li>  
+                <li><button onclick ="HiddenGame()">Hide</button></li>
+                <li><button onclick="reloadGame()">Restart</button></li>   
                 </ul>
                 <ul id="list" class="flex-container"></ul>
 		</section>

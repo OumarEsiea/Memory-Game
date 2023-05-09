@@ -9,6 +9,7 @@ main {
 }
 
 section{
+    text-align:center;
     background-color: white;
     border-radius: 20px;
     padding: 5px;
@@ -47,7 +48,7 @@ img {
 
 .toolbar {
     text-align: center;
-    margin-top: 50px;
+    margin-top: 20px;
 }
 
 ul {
@@ -76,5 +77,9 @@ footer{
     font-weight: bold;
 }
 
-
-  
+input {
+    text-align: center;
+    border-width: 5px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+}

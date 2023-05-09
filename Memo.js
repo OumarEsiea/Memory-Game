@@ -7,7 +7,7 @@ class MemoryGame {
     }
   
     Init() {
-        this.images = ["1.png","2.png","3.png","4.png","5.png","6.png","7.png","8.png","9.png","10.png"];
+        this.images = ["1.png","2.png","3.png","4.png","5.png","6.png","7.png","8.png","9.png","10.png","11.png","12.png"];
         // remplisser le tableau avec les id de vos images 
     }
   
@@ -62,20 +62,19 @@ class MemoryGame {
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min) + min);
   }
-  
-  function startGame(difficulty) {
+
+  function startGame() {
+    var difficulty = document.getElementById(`size`).value;
     var memoryGameTest = new MemoryGame(difficulty);
     memoryGameTest.Play();
   }
-  function HiddenGame(difficulty) {
+  function HiddenGame() {
+    var difficulty = document.getElementById(`size`).value;
     var memoryGameTest = new MemoryGame(difficulty);
     memoryGameTest.Hidden();
   }
   
-  
-  
-  
-  function reloadGame(difficulty) {
-    var memoryGameTest = new MemoryGame(difficulty);
+  function reloadGame() {
+    var memoryGameTest = new MemoryGame();
     memoryGameTest.reload();
   }
