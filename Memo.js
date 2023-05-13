@@ -40,6 +40,8 @@ class MemoryGame {
     Play() {
         this.Init();
         this.Shuffle();
+        var cadre = document.getElementById(`Size`)
+        cadre.innerHTML = `Size : ${this.size}`
     }
   
     Hidden() {
@@ -55,7 +57,7 @@ class MemoryGame {
       }
       list.innerHTML = htmltags;
     }
-  }
+  }  
   
   function getRandomInt(min, max) {
     min = Math.ceil(min);
@@ -64,10 +66,13 @@ class MemoryGame {
   }
 
   function startGame() {
-    var difficulty = document.getElementById(`size`).value;
+    var difficulty = document.getElementById(`size`).value+1;
     var memoryGameTest = new MemoryGame(difficulty);
     memoryGameTest.Play();
+    var tmp = document.getElementById(`timer`).value;
+    setTimeout(function() {memoryGameTest.Hidden();}, tmp*1000);
   }
+
   function HiddenGame() {
     var difficulty = document.getElementById(`size`).value;
     var memoryGameTest = new MemoryGame(difficulty);
@@ -75,6 +80,11 @@ class MemoryGame {
   }
   
   function reloadGame() {
+    location.reload()
     var memoryGameTest = new MemoryGame();
     memoryGameTest.reload();
+  }
+
+  function showCard(id){
+    var image = document.getElementById(`item${i}`)
   }
