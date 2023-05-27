@@ -1,5 +1,5 @@
 class MemoryGame {
-    constructor(size) {
+    constructor(size=6) {
         this.size = size;
         this.images = [];
        
@@ -7,7 +7,7 @@ class MemoryGame {
     }
   
     Init() {
-        this.images = ["1.png","2.png","3.png","4.png","5.png","6.png","7.png","8.png","9.png","10.png","11.png","12.png"];
+        this.images = ["0.png","1.png","2.png","3.png","4.png","5.png","6.png","7.png","8.png","9.png","10.png","11.png","12.png"];
         // remplisser le tableau avec les id de vos images 
     }
   
@@ -16,7 +16,7 @@ class MemoryGame {
         const list = document.getElementById("list");
         let htmltags = "";
         for(let i = 0; i<((this.size)*2); i++) {
-            htmltags = htmltags + '<li class="flex-item"><a href="#"><img id="item' + i + '" width="50%" src="20.png"></a></li>';
+            htmltags = htmltags + '<li class="flex-item"><a href="#"><img id="item' + i + '" width="50%" onclick=showCard('+i+') src="20.png"></a></li>';
         }
         list.innerHTML = htmltags;
   
@@ -53,10 +53,15 @@ class MemoryGame {
       const list = document.getElementById("list");
       let htmltags = "";
       for(let i = 0; i<this.size*2; i++) {
-          htmltags = htmltags + '<li class="flex-item"><a href="#"><img id="item' + i + '" width="50%" src="21.png"></a></li>';
+          htmltags = htmltags + '<li class="flex-item"><a href="#"><img id="item' + i + '" width="50%" onclick=showCard('+i+') src="21.png"></a></li>';
       }
       list.innerHTML = htmltags;
     }
+    showCard(id){
+        var image = document.getElementById(`item${id}`)    
+        image.src = this.images[this.selectedImages[id]];
+    
+      }
   }  
   
   function getRandomInt(min, max) {
@@ -66,16 +71,17 @@ class MemoryGame {
   }
 
   function startGame() {
-    var difficulty = document.getElementById(`size`).value+1;
+    let difficulty = document.getElementById(`size`).value;
     var memoryGameTest = new MemoryGame(difficulty);
     memoryGameTest.Play();
-    var tmp = document.getElementById(`timer`).value;
+    let tmp = document.getElementById(`timer`).value;
     setTimeout(function() {memoryGameTest.Hidden();}, tmp*1000);
+    console.log(difficulty)
   }
 
   function HiddenGame() {
-    var difficulty = document.getElementById(`size`).value;
-    var memoryGameTest = new MemoryGame(difficulty);
+    // var difficulty = document.getElementById(`size`).value;
+    var memoryGameTest = new MemoryGame();
     memoryGameTest.Hidden();
   }
   
@@ -83,8 +89,4 @@ class MemoryGame {
     location.reload()
     var memoryGameTest = new MemoryGame();
     memoryGameTest.reload();
-  }
-
-  function showCard(id){
-    var image = document.getElementById(`item${i}`)
   }
