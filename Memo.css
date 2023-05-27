@@ -91,3 +91,10 @@ input {
     width: 100px;
     height: 150px;
 }
+label{
+    font-weight: bolder;
+    font-style: italic;
+    background-color: orange;
+    padding: 10px;
+    border-radius: 5px;
+}
