@@ -4,10 +4,12 @@ class MemoryGame {
         this.images = [];
         this.time=document.getElementById(`timer2`).value
         this.selectedImages = [];
-        this.count ;
         this.Premierchoix = null;
         this.Secondchoix = null;
         this.nombreclicks =0;
+        this.position1=0;
+        this.position2=0;
+        this.Life=3;
     }
   
     Init() {
@@ -46,6 +48,7 @@ class MemoryGame {
         this.Shuffle();
         var cadre = document.getElementById(`Size`)
         cadre.innerHTML = `Size : ${this.size}`
+        document.getElementById(`life`).innerHTML = `Vie(s) : ${this.Life}`
     }
   
     Hidden() {
@@ -68,7 +71,9 @@ class MemoryGame {
         minuteur.innerText = `Timer : ${this.time}` 
         this.time --;
 
-
+        if (this.time <= 9){
+            minuteur.style.color ="red"
+        }
         if (this.time == -2){
         window.alert(`Le temps de jeu est écoulé`)
         location.reload()
@@ -79,26 +84,41 @@ class MemoryGame {
         image.src = this.images[this.selectedImages[id]];
         this.nombreclicks++
         
-        if(this.nombreclicks = 1){
-            this.Premierchoix =this.images[this.selectedImages[id]]
+        if(this.nombreclicks == 1){
+            this.Premierchoix = this.images[this.selectedImages[id]]
             console.log(this.Premierchoix,this.nombreclicks)
+            this.position1 = id
         }
         
         else{
-            this.Secondchoix=this.images[this.selectedImages[id]]
+            this.Secondchoix = this.images[this.selectedImages[id]]
             console.log(this.Secondchoix,this.nombreclicks)
+            this.position2 =id
         }
 
-        if(this.Premierchoix != this.Secondchoix){
-            this.Premierchoix = "11.png";
-            this.Secondchoix = "11.png";
-            /* this.Premierchoix = "11.png"
-            this.Secondchoix = "11.png"
-            */
-        }
+        if(this.Premierchoix !== this.Secondchoix && this.nombreclicks>1){
 
+            this.Life--; 
+            setTimeout(() =>{
+            let card1 = document.getElementById(`item${this.position1}`)
+            card1.src="11.png";
+            let card2 = document.getElementById(`item${this.position2}`)
+            card2.src="11.png";
+           this.nombreclicks=0;
+             },1000);
+     
+        }else 
+        if(this.Premierchoix == this.Secondchoix)
+            this.nombreclicks = 0;
+    
+    }
+    Message(){
+        const Message=document.getElementById("message")
+        Message.innerText= `Life = ${this.Life} and Correct finder = ${this.good} `;
+    }
+
+        
   }  
-}
   function getRandomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
@@ -110,8 +130,13 @@ class MemoryGame {
     memoryGameTest = new MemoryGame(difficulty);
     memoryGameTest.Play();
     let tmp = document.getElementById(`timer`).value;
-    setTimeout(function() {memoryGameTest.Hidden();}, tmp*1000);
+    let memo = document.getElementById(`Message`)
+    memo.innerHTML = "Temps de Mémorisation ..."
+    setTimeout(function() {
+        memo.style.display="none";
+        memoryGameTest.Hidden();}, tmp*1000);
     var horloge = setInterval(function() {memoryGameTest.timer();}, 1000);
+    document.getElementById(`Start`).style.display="none"
   }
 
   function HiddenGame() {
