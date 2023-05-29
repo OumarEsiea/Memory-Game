@@ -7,6 +7,7 @@ class MemoryGame {
         this.count ;
         this.Premierchoix = null;
         this.Secondchoix = null;
+        this.nombreclicks =0;
     }
   
     Init() {
@@ -76,6 +77,26 @@ class MemoryGame {
     showCard(id){
         var image = document.getElementById(`item${id}`)    
         image.src = this.images[this.selectedImages[id]];
+        this.nombreclicks++
+        
+        if(this.nombreclicks = 1){
+            this.Premierchoix =this.images[this.selectedImages[id]]
+            console.log(this.Premierchoix,this.nombreclicks)
+        }
+        
+        else{
+            this.Secondchoix=this.images[this.selectedImages[id]]
+            console.log(this.Secondchoix,this.nombreclicks)
+        }
+
+        if(this.Premierchoix != this.Secondchoix){
+            this.Premierchoix = "11.png";
+            this.Secondchoix = "11.png";
+            /* this.Premierchoix = "11.png"
+            this.Secondchoix = "11.png"
+            */
+        }
+
   }  
 }
   function getRandomInt(min, max) {
