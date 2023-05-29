@@ -10,6 +10,7 @@ class MemoryGame {
         this.position1=0;
         this.position2=0;
         this.Life=3;
+        this.Paire=0;
     }
   
     Init() {
@@ -49,6 +50,7 @@ class MemoryGame {
         var cadre = document.getElementById(`Size`)
         cadre.innerHTML = `Size : ${this.size}`
         document.getElementById(`life`).innerHTML = `Vie(s) : ${this.Life}`
+        document.getElementById(`Paire`).innerHTML = `Paire trouvées : ${this.Paire}`
     }
   
     Hidden() {
@@ -104,8 +106,10 @@ class MemoryGame {
             console.log(this.Life)
             setTimeout(() =>{
             let card1 = document.getElementById(`item${this.position1}`)
+            card1.style.backgroundColor="red"
             card1.src="11.png";
             let card2 = document.getElementById(`item${this.position2}`)
+            card2.style.backgroundColor="red"
             card2.src="11.png";
            this.nombreclicks=0;
              },1000);
@@ -113,11 +117,12 @@ class MemoryGame {
         }else 
         if(this.Premierchoix == this.Secondchoix)
             this.nombreclicks = 0;
+            this.Paire++;
     
-        /*if(this.Life == 0){
-            window.alert(`Vous avez épuisé toutes vos vies`)
-            location.reload()
-        }*/
+        if(this.Life == 0){
+            window.alert(`Vous avez épuisé toutes vos vies, veuillez rééessayer`)
+            this.Hidden()
+        }
     }
 
         
