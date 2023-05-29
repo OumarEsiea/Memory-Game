@@ -50,7 +50,6 @@ class MemoryGame {
         var cadre = document.getElementById(`Size`)
         cadre.innerHTML = `Size : ${this.size}`
         document.getElementById(`life`).innerHTML = `Vie(s) : ${this.Life}`
-        document.getElementById(`Paire`).innerHTML = `Paire trouvées : ${this.Paire}`
     }
   
     Hidden() {
@@ -115,14 +114,23 @@ class MemoryGame {
              },1000);
      
         }else 
-        if(this.Premierchoix == this.Secondchoix)
+        if(this.Premierchoix == this.Secondchoix){
             this.nombreclicks = 0;
             this.Paire++;
+            document.getElementById(`Paire`).innerHTML = `Paire trouvées : ${this.Paire}`
+        }
     
         if(this.Life == 0){
             window.alert(`Vous avez épuisé toutes vos vies, veuillez rééessayer`)
             this.Hidden()
         }
+        if (this.Paire == this.size-1)
+        var victoire = document.getElementById(`Message`)
+        victoire.style.display="block"
+        victoire.style.font = "500";
+        victoire.style.color ="green"
+        victoire.innerHTML = "Vous avez gagné !!!!"
+        this.Hidden()
     }
 
         
