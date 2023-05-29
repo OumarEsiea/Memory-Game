@@ -84,6 +84,7 @@ class MemoryGame {
         image.src = this.images[this.selectedImages[id]];
         this.nombreclicks++
         
+
         if(this.nombreclicks == 1){
             this.Premierchoix = this.images[this.selectedImages[id]]
             console.log(this.Premierchoix,this.nombreclicks)
@@ -99,6 +100,8 @@ class MemoryGame {
         if(this.Premierchoix !== this.Secondchoix && this.nombreclicks>1){
 
             this.Life--; 
+            document.getElementById(`life`).innerHTML = `Vie(s) : ${this.Life}`
+            console.log(this.Life)
             setTimeout(() =>{
             let card1 = document.getElementById(`item${this.position1}`)
             card1.src="11.png";
@@ -111,10 +114,10 @@ class MemoryGame {
         if(this.Premierchoix == this.Secondchoix)
             this.nombreclicks = 0;
     
-    }
-    Message(){
-        const Message=document.getElementById("message")
-        Message.innerText= `Life = ${this.Life} and Correct finder = ${this.good} `;
+        /*if(this.Life == 0){
+            window.alert(`Vous avez épuisé toutes vos vies`)
+            location.reload()
+        }*/
     }
 
         
