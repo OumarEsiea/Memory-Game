@@ -58,7 +58,7 @@ it('Nombre correct de cartes affichées', () => {
   cy.get('ul li').should('have.length',8)
 })
 
-it('Action sur une carte', () => {
+it('Action sur une carte', () => { //Test fonctionnel mais, mais non éxécuté correctement entier en raison d'un itération qui ne fait pas jusq'au bout
   cy.visit('../../../Memo.html')
   cy.get('#size').type('3')
   cy.get('#timer').type('1')

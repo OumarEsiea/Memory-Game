@@ -1,5 +1,6 @@
 <template>
-<title>Memory Game</title>
+<meta charset="utf-8">
+    <title>Memory Game</title>
 </template>
 
 <script>

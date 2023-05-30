@@ -1,6 +1,7 @@
 <template>
     <main>
-        <section>
+		<section>
+			<h1>Memory Game</h1>
             <label for="size">Taille du jeu</label>
             <input id="size" type="text" required maxlength="1" size="5">
             <label for="timer">Temps de Mémorisation</label>
@@ -13,8 +14,16 @@
                 <p id="life">Vie(s) : 3</p>
                 <p id="Paire"></p>
             </nav>
-        </section>
-    </main>
+			<div class = "toolbar">
+                <ul>
+                <li><button id ="Start" onclick ="startGame()">Play</button></li>  
+                <li><button id="Restart" onclick="reloadGame()">Restart</button></li>   
+                </ul>
+                <p id="Message"></p>
+                <ul id="list" class="flex-container"></ul>
+            </div>
+		</section>
+	</main>
     </template>
     
 <script>

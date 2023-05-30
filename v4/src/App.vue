@@ -1,6 +1,6 @@
 <template>
+   <AppHeader msg="Welcome to Your Vue.js App"/>
   <AppContent/>
-  <AppHeader msg="Welcome to Your Vue.js App"/>
   <GameConfig/>
   <GamePlay/>
 </template>
