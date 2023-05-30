@@ -44,6 +44,9 @@ it('Temps imparti', () => {
   cy.get('#Start').click()
   cy.wait(1000)
   cy.get('#timer2').should("have.html","")
+  cy.on('window:alert', (alert) => {
+    expect(alert).to.contains('Le temps est écoulé!');
+});
 })
 
 it('Nombre correct de cartes affichées', () => {
