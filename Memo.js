@@ -2,7 +2,7 @@ class MemoryGame {
     constructor(size) {
         this.size = size;
         this.images = [];
-        this.time=document.getElementById(`timer2`).value
+        this.time=document.getElementById(`timer2`).value;
         this.selectedImages = [];
         this.Premierchoix = null;
         this.Secondchoix = null;
@@ -50,6 +50,9 @@ class MemoryGame {
         var cadre = document.getElementById(`Size`)
         cadre.innerHTML = `Size : ${this.size}`
         document.getElementById(`life`).innerHTML = `Vie(s) : ${this.Life}`
+        if (this.time < this.tmp){
+            this.reload()
+        }
     }
   
     Hidden() {
@@ -74,6 +77,7 @@ class MemoryGame {
 
         if (this.time <= 9){
             minuteur.style.color ="red"
+            minuteur.classList.add("blink")
         }
         if (this.time == -2){
         window.alert(`Le temps de jeu est écoulé`)
@@ -153,6 +157,7 @@ class MemoryGame {
         memoryGameTest.Hidden();}, tmp*1000);
     var horloge = setInterval(function() {memoryGameTest.timer();}, 1000);
     document.getElementById(`Start`).style.display="none"
+   
   }
 
   function HiddenGame() {

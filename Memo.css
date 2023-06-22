@@ -101,5 +101,22 @@ label{
 
 #Message{
     font-weight: bold;
+    font-style: italic;
     color: red;
 }
+
+.blink {
+    animation: blink 1s steps(1, end) infinite; /* pour avoir un effet fade on enlève le step */
+  }
+  
+  @keyframes blink {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
