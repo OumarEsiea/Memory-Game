@@ -50,9 +50,18 @@ class MemoryGame {
         var cadre = document.getElementById(`Size`)
         cadre.innerHTML = `Size : ${this.size}`
         document.getElementById(`life`).innerHTML = `Vie(s) : ${this.Life}`
-        if (this.time < this.tmp){
-            this.reload()
-        }
+        let tmp2 = document.getElementById(`timer`).value;
+        try {
+            tmp2 = Number(tmp2)
+            this.time = Number(this.time)
+            if(isNaN(this.time) && isNaN(tmp2)) throw "not a number"
+            if(tmp2 >= this.time) throw "Vous ne pouvez pas avoir un temps de mémorisation supérieur au temps de jeu !"
+            if(tmp2 == 0 || this.time ==0) throw "Vous ne pouvez pas avoir une saisie égale à 0 !"
+          }
+          catch(err) {
+            window.alert("Veuillez refaire votre saisie \n"+ err)
+            location.reload()
+          }
     }
   
     Hidden() {
@@ -76,10 +85,11 @@ class MemoryGame {
         this.time --;
 
         if (this.time <= 9){
-            minuteur.style.color ="red"
-            minuteur.classList.add("blink")
+            minuteur = document.getElementById(`Alerte`)
+            minuteur.innerText = `Le temps imparti se termine bientôt \n 0 : ${this.time}` 
+            minuteur.classList.add("Alerte")
         }
-        if (this.time == -2){
+        if (this.time == -1){
         window.alert(`Le temps de jeu est écoulé`)
         location.reload()
         }
@@ -134,6 +144,7 @@ class MemoryGame {
         victoire.style.font = "500";
         victoire.style.color ="green"
         victoire.innerHTML = "Vous avez gagné !!!!"
+        victoire.classList.add("fade")
         this.Hidden()
     }
 
@@ -148,16 +159,16 @@ class MemoryGame {
   function startGame() {
     let difficulty = document.getElementById(`size`).value;
     memoryGameTest = new MemoryGame(difficulty);
-    memoryGameTest.Play();
     let tmp = document.getElementById(`timer`).value;
     let memo = document.getElementById(`Message`)
+    memoryGameTest.Play();
     memo.innerHTML = "Temps de Mémorisation ..."
+    memo.classList.add('fade')
     setTimeout(function() {
         memo.style.display="none";
-        memoryGameTest.Hidden();}, tmp*1000);
+        memoryGameTest.Hidden();},tmp*1000);
     var horloge = setInterval(function() {memoryGameTest.timer();}, 1000);
     document.getElementById(`Start`).style.display="none"
-   
   }
 
   function HiddenGame() {

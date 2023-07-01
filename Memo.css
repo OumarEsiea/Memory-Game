@@ -105,10 +105,6 @@ label{
     color: red;
 }
 
-.blink {
-    animation: blink 1s steps(1, end) infinite; /* pour avoir un effet fade on enlève le step */
-  }
-  
   @keyframes blink {
     0% {
       opacity: 1;
@@ -119,4 +115,23 @@ label{
     100% {
       opacity: 1;
     }
+  }
+
+.fade{
+    animation:fade 1500ms infinite;
+    -webkit-animation:fade 1500ms infinite; 
+}  
+
+  @keyframes fade {
+    from { opacity: 1.0; }
+    50% { opacity: 0.2; }
+    to { opacity: 1.0; }
+  }
+
+  .Alerte {
+    animation: blink 1s steps(1, end) infinite;
+    font-variant-numeric: slashed-zero;
+    color: red;
+    font-size: large;
+    font-weight: bold;
   }
