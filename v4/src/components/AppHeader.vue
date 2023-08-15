@@ -1,6 +1,6 @@
 <template>
 <meta charset="utf-8">
-    <title>Memory Game</title>
+    <h1>{{ msg }}</h1>
 </template>
 
 <script>

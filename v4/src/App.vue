@@ -1,9 +1,10 @@
 <template>
-   <AppHeader msg="Welcome to Your Vue.js App"/>
+   <AppHeader msg="Memory Game Version VueJs"/>
   <AppContent/>
   <GameConfig/>
   <GamePlay/>
-  <GameCard/>
+  <GameCard v-bind:id="`cardI${cardId}`"/>
+ <GamePlayLegacy/>
 </template>
 
 <script>
