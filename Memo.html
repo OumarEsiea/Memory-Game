@@ -9,7 +9,7 @@
 <body>
 	<main>
 		<section>
-			<h1>Memory Game</h1>
+			<h1 style="color: red;font-style: italic;" class="fade" >Memory Game</h1>
             <label for="size">Taille du jeu</label>
             <input id="size" type="text" required maxlength="1" size="5">
             <label for="timer">Temps de Mémorisation</label>
@@ -33,6 +33,10 @@
             <ul id="list" class="flex-container"></ul>
 		</section>
 	</main>
-	<footer>ESIEA 2023</footer>
+	<footer>ESIEA 2023 <br>
+        <script type="text/javascript">
+            document.write(Date())
+        </script>    
+        </footer>
 </body>
 </html>
