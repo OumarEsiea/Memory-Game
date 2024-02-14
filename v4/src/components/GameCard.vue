@@ -1,5 +1,5 @@
 <template>
-<h1></h1>
+<img :src="`${cardId}.png`" class="flex-item" width="50%" v-on:click="Hide()" id="carte">
 </template>
 
 <script>
@@ -8,6 +8,15 @@ name: 'GameCard',
 props: {
 cardId: { type: String, default: "0"},
 imageId: { type: String, default: "10"},
-    }
+    },
 }
+
 </script>
+
+<style>
+img {
+    display: flex;
+    margin: auto;
+    width: 100%;
+}
+</style>

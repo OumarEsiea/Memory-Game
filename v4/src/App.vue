@@ -1,32 +1,20 @@
 <template>
-   <AppHeader msg="Memory Game Version VueJs"/>
-  <AppContent/>
+  <center><AppHeader msg="Memory Game Version VueJs"/></center>
   <GameConfig/>
-  <GamePlay/>
-  <GameCard v-bind:id="`cardI${cardId}`"/>
- <GamePlayLegacy/>
+  <Footer msg="ESIEA 2023"></Footer>
 </template>
 
 <script>
-import AppContent from './components/AppContent.vue';
 import AppHeader from './components/AppHeader.vue'
-import GameConfig from './components/GameConfig.vue';
-import GamePlay from './components/GamePlay.vue';
-import GameCard from './components/GameCard.vue';
-import GamePlayLegacy from './components/GamePlayLegacy.vue';
+import GameConfig from './components/GameConfig.vue'
+import Footer from './components/Footer.vue'
+
 export default {
   name: 'App',
   components: {
-    AppContent,
     AppHeader,
     GameConfig,
-    GamePlay,
-    GameCard,
-    GamePlayLegacy
+    Footer,
   }
 }
-
 </script>
-
-<style>
-</style>

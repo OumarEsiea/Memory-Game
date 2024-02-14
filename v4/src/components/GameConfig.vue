@@ -1,13 +1,13 @@
 <template>
     <main>
 		<section>
-			<h1>Memory Game</h1>
+			<h1 style="color: red;font-style: italic;" class="fade" >Memory Game</h1>
             <label for="size">Taille du jeu</label>
             <input id="size" type="text" required maxlength="1" size="5">
             <label for="timer">Temps de Mémorisation</label>
             <input id="timer" type="text" required maxlength="2" size="5">
             <label for="timer2">Temps imparti</label>
-            <input id="timer2" type="text" required maxlength="4" size="5">
+            <input id="timer2" type="text" required maxlength="2" size="5">
             <nav class="Jeu">
                 <p id ="Size">Size : 0</p>
                 <p id ="Timer">Timer : 0</p>
@@ -15,19 +15,22 @@
                 <p id="Paire"></p>
             </nav>
 			<div class = "toolbar">
+                <p id = "Alerte"></p>
                 <ul>
                 <li><button id ="Start" onclick ="startGame()">Play</button></li>  
                 <li><button id="Restart" onclick="reloadGame()">Restart</button></li>   
                 </ul>
-                <p id="Message"></p>
-                <ul id="list" class="flex-container"></ul>
             </div>
+            <div id="Message"></div>
+            <GamePlay/>
 		</section>
-	</main>
+        </main>
     </template>
     
 <script>
+     import GamePlay from './GamePlay.vue';
     export default{
         name :'GameConfig',
+        components : {GamePlay},
     }
 </script>
