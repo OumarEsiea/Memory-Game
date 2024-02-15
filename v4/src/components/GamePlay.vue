@@ -1,5 +1,5 @@
 <template>
-    <GameCard v-for="ImageId in game" :key="ImageId" :cardId="ImageId"/>
+    <GameCard v-for="ImageId in game" :key="ImageId" :imageId="ImageId"/>
     <center><button v-on:click="changeMe()">Refresh</button></center>
 </template>
 
@@ -21,11 +21,11 @@ methods: {
     return Math.floor(Math.random() * (max - min) + min);
   },
 
-  changeMe() {
+    changeMe() {
     this.game = this.game.map(() => {
         return this.getRandomInt(0,20)                      
-    })
-}
+        })
+    }
 }
 }
 </script>
