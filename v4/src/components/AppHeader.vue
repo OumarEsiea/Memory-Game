@@ -6,7 +6,7 @@
     <li>V1</li>
     <li>V2</li>
     <li>V3</li>
-    <li>V4</li>
+    <li style="color: black">V4</li>
     <li><img src="favicon.ico" class="fade"></li>
   </ul>
 </nav>

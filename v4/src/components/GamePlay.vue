@@ -1,6 +1,10 @@
 <template>
-    <GameCard v-for="ImageId in game" :key="ImageId" :imageId="ImageId"/>
-    <center><button v-on:click="changeMe()">Refresh</button></center>
+   <ul class="flex-container"> 
+    <GameCard v-for="Image in game" :key="Image" :cardId="Image" @ChangeId="Update"/>
+   </ul>
+    <center><button v-on:click="changeMe()">Refresh</button>
+            <button @click="HideAll()">Hide</button>
+    </center>
 </template>
 
 <script>
@@ -11,6 +15,9 @@ export default{
     data() {
         return {
             game: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+            message : false,
+            Tps_Impartie : Number,
+            Image : Number
         }
     },
 
@@ -25,7 +32,18 @@ methods: {
     this.game = this.game.map(() => {
         return this.getRandomInt(0,20)                      
         })
-    }
+    },
+
+    HideAll(Tps_Impartie){
+        this.message = true
+        setTimeout(() => {
+        this.game = this.game.map(() => 11)
+        }, Tps_Impartie);
+        console.log("La carde id "+ this.ImageId)
+    },
+     Update(){
+        this.Image = 13
+     }
 }
 }
 </script>
