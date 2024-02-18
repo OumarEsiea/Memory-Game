@@ -1,5 +1,5 @@
 <template>
-<li class="flex-item"><img :src="`${cardId}.png`" v-on:click="ChangeId()">                      
+<li><img :src="`${card}.png`" v-on:click="IdChange()">                      
 </li>
 </template>
 
@@ -12,25 +12,27 @@ imageId: { type: String, default: "10"},
     },
     data (){
         return {
-            card : String, default:"11",
+            card : this.cardId,
+            click : 0
         }
     },
     methods : {
-        Hide(){
-            console.log(this.Appuie)
-            this.Appuie = true
-            console.log(this.Appuie)
-        },
+        IdChange() {
+            this.click++
+            if(this.click <3){
+            if( this.card){
+            this.card = "11"
+            console.log(true)
+            }
+            if(this.click == 2)
+            {
+                this.card = this.imageId
+            }
+        }
 
-        ChangeId() {
-            let newCardId = 'nouvel_id_de_carte'
-            this.$emit('ChangeId', newCardId);
-        
     }
-
     }
 }
-
 </script>
 
 <style>

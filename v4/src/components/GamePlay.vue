@@ -1,6 +1,6 @@
 <template>
    <ul class="flex-container"> 
-    <GameCard v-for="Image in game" :key="Image" :cardId="Image" @ChangeId="Update"/>
+    <GameCard v-for="Image in game" :key="Image" :cardId="Image" :imageId="Image"/>
    </ul>
     <center><button v-on:click="changeMe()">Refresh</button>
             <button @click="HideAll()">Hide</button>
@@ -39,10 +39,10 @@ methods: {
         setTimeout(() => {
         this.game = this.game.map(() => 11)
         }, Tps_Impartie);
-        console.log("La carde id "+ this.ImageId)
+  
     },
      Update(){
-        this.Image = 13
+    
      }
 }
 }
