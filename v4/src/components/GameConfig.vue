@@ -14,14 +14,6 @@
                 <p id="life">Vie(s) : 3</p>
                 <p id="Paire"></p>
             </nav>
-			<div class = "toolbar">
-                <p id = "Alerte"></p>
-                <ul>
-                <li><button id ="Start" onclick ="startGame()">Play</button></li>  
-                <li><button id="Restart" onclick="reloadGame()">Restart</button></li>   
-                </ul>
-            </div>
-            <div id="Message"></div>
             <GamePlay/>
 		</section>
         </main>
