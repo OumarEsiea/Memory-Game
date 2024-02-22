@@ -84,12 +84,12 @@ input {
 }
 
 .Jeu{
-    padding-top: 10px;
+    padding: 10px;
     background-color: orange;
     font-weight: bold;
     border-radius: 10px;    
     width: 100px;
-    height: 150px;
+    
 }
 label{
     font-weight: bolder;

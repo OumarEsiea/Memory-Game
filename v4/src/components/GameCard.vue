@@ -1,5 +1,5 @@
 <template>
-<li class="flex-item"><img :src="`${card}.png`" v-on:click="IdChange()">                      
+<li class="flex-item"><img :src="`${card}.png`" v-on:click="IdChange()" @ResultSelect="ResultChoix">                      
 </li>
 </template>
 
@@ -14,22 +14,24 @@ imageId: { type: String, default: "10"},
         return {
             card : this.cardId,
             click : 0,
+            Choix : Object
         }
     },
     methods : {
 
-        IdChange() {
-           this.click++
-            if(this.click <3){
+    IdChange() {
+        this.click++
+        this.Choix++
+        this.card = this.imageId
+        this.$emit('VerifChoix', this.Choix ={"choix" : this.click, "card" : this.imageId})
+    },
 
-            if(this.click == 1)
-            {
-                this.card = this.imageId
-                console.log(this.imageId)
-            }
-
-        }
-        
+    ResultChoix(data){
+        console.log("Valeur de la carte "+this.card)
+        setTimeout(()=>{
+            this.card = "11"
+        },5000)  
+        console.log("Donnée "+data)  
     }
     }
 }

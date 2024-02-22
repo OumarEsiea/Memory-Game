@@ -1,4 +1,5 @@
 <template>
+    <br>
 <center>{{ msg }}<br><br>
         {{ date }}
     </center>
