@@ -76,7 +76,6 @@ methods: {
 
     Init(){ //Trouver un moyen d'utiliser Array.prot.splice()
 
-      console.log("Taille du jeu : "+this.Jeu)
       for(let i = 0; i<this.Jeu; i++){
         this.game.push(i)
       }
@@ -88,7 +87,6 @@ methods: {
       this.game.sort(()=> Math.random() - 0.5)
  
       this.ChargerJeu = true
-      this.game.forEach(x => console.log(x))
     },
 
       getCardId(){
@@ -130,7 +128,7 @@ methods: {
         this.Paires_trouve.push(this.Premier_choix,this.Deuxieme_choix)
       }
 
-      if(this.Paires == 2){//this.Jeu - 1){
+      if(this.Paires == 3){//this.Jeu - 1){
         this.Victoire = true
         this.PartieFinished = true
       }
@@ -138,7 +136,8 @@ methods: {
       if(this.Vies == 0){
         this.Victoire = false
         this.PartieFinished = true
-        this.HideAll()
+        window.alert('Vous avez épuisé toutes vos tentatives.')
+        location.reload()
       }
     },
 
