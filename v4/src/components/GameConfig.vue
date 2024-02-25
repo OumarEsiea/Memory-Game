@@ -1,33 +1,32 @@
 <template>
     <main>
 		<section>
-			<h1 style="color: red;font-style: italic;" class="fade" >Memory Game</h1>
+			<h1 style="color: red;font-style: italic;" class="fade">Memory Game</h1>
             <label for="size">Taille du jeu</label>
-            <input v-model="Taille_Jeu" :ref="input">
+            <input type="number" v-model="Taille_Jeu">
 
             <label for="timer">Temps de Mémorisation</label>
-            <input v-model="Tps_Memo">
+            <input type="number" v-model="Tps_Memo">
 
             <label for="timer2">Temps imparti</label>
-            <input v-model="TpsJeu">
-            <span :color="red">{{ Taille }} <br>{{ Tps_Memo }}<br>{{ TpsJeu }}</span>
-            <GamePlay :-taille="{Taille_Jeu}" :-memo="{Tps_Memo}" :-temps="{input}"/>
+            <input type="number" v-model="TpsJeu">
+
+            <GamePlay :Taille="Taille_Jeu" :Memo="Tps_Memo" :Temps="TpsJeu"/>
 		</section>
         </main>
     </template>
     
 <script>
-     import GamePlay from './GamePlay.vue';
-     import { ref } from 'vue'
+    import GamePlay from './GamePlay.vue';
     export default{
         name :'GameConfig',
         components : {GamePlay},
-        setup() {
-        const input = ref(null)
-    // ...
+       data (){
         return {
-        input
-    }
-  }
+            Taille_Jeu : 0,
+            Tps_Memo : 0,
+            TpsJeu : 0
+        }
+       },
     }
 </script>

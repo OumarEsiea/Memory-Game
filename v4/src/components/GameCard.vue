@@ -1,5 +1,5 @@
 <template>
-<li class="flex-item"><img :src="`${card}.png`" v-on:click="IdChange()" @ResultSelect="ResultChoix">                      
+<li class="flex-item"><img :src="`${card}.png`" v-on:click="IdChange()">                      
 </li>
 </template>
 
@@ -9,6 +9,7 @@ name: 'GameCard',
 props: {
 cardId: { type: String, default: "0"},
 imageId: { type: String, default: "10"},
+choix : String
     },
     data (){
         return {
@@ -20,18 +21,18 @@ imageId: { type: String, default: "10"},
     methods : {
 
     IdChange() {
+        if(this.click < 1){
         this.click++
         this.Choix++
         this.card = this.imageId
         this.$emit('VerifChoix', this.Choix ={"choix" : this.click, "card" : this.imageId})
-    },
-
-    ResultChoix(data){
-        console.log("Valeur de la carte "+this.card)
-        setTimeout(()=>{
-            this.card = "11"
-        },5000)  
-        console.log("Donnée "+data)  
+        }
+        if (this.choix == 'Mauvais'){
+            console.log("Reception du choix : "+this.choix)
+            setTimeout(()=>{
+                this.card = "11"},
+                2000)
+        }
     }
     }
 }

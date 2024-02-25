@@ -122,6 +122,10 @@ label{
     -webkit-animation:fade 1500ms infinite; 
 }  
 
+.Appear{
+  animation: fade  1500;
+  -webkit-animation:fade 1500ms; 
+}
   @keyframes fade {
     from { opacity: 1.0; }
     50% { opacity: 0.2; }
