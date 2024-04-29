@@ -16,7 +16,6 @@ section{
 }
 
 h1 {
-    color: black;
     align-items: center;
     font-weight: bold;
 }
@@ -25,15 +24,14 @@ h1 {
     flex-flow: row wrap;
     justify-content: space-around;
     padding: 10px;
-    list-style: none;
 }
 
 .flex-item {
     
     padding: 5px;
-    width: 200px;
+    width: fit-content;
     height: 150px;
-    margin-top: 10px;
+    margin: 20px;
     border-radius: 10px;
     background-color: gray;
 }
@@ -125,6 +123,7 @@ label{
 .Appear{
   animation: fade  1500;
   -webkit-animation:fade 1500ms; 
+  animation-delay: 2s;
 }
   @keyframes fade {
     from { opacity: 1.0; }
@@ -134,7 +133,6 @@ label{
 
   .Alerte {
     animation: blink 1s steps(1, end) infinite;
-    font-variant-numeric: slashed-zero;
     color: red;
     font-size: large;
     font-weight: bold;

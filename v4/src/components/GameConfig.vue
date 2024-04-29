@@ -23,9 +23,9 @@
         components : {GamePlay},
        data (){
         return {
-            Taille_Jeu : 0,
-            Tps_Memo : 0,
-            TpsJeu : 0
+            Taille_Jeu : 5,
+            Tps_Memo : 30,
+            TpsJeu : 60
         }
        },
     }

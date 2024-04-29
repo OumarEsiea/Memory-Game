@@ -7,14 +7,16 @@
                 <p v-if="horloge <10" class="Alerte"> 0 : {{ horloge }}</p>
                 <p v-else> Temps restant : {{ horloge }}</p>
             </nav>
-   
+             
             <div class = "toolbar">
                 <div v-if="PartieFinished">    
                   <p v-if="Victoire">
                     <span class="fade" style="color: green;font-weight: bold;">Victoire 
-                      <br> Paires trouvées</span>
+                      <br> Pokemons trouvées</span>
                     <ul>
-                    <GameCard v-for="Paires in Paires_trouve" :key="Paires" :cardId="Paires"></GameCard>
+                    <div v-for="Paires in Paires_trouve" :key="Paires">
+                    <img :src="Paires.ImGSrc">
+                    </div>
                     </ul>    
                   </p>
                 <p v-else class="fade"><span style="color: red;font-weight: bold;">Defaite</span></p>
@@ -48,17 +50,17 @@ export default{
             Indice_Previous : [],
             Paires_trouve : [],
             ChargerJeu : false,
-            Premier_choix : Number,
-            Deuxieme_choix : Number,
+            Premier_choix : 0,
+            Deuxieme_choix : 0,
             Tps_Memo : this.Memo,
             horloge : this.Temps,
             Carte_Selec : 0,
-            nbclick : 0,
             Vies : 3,
             Paires : 0,
             Victoire : false,
             PartieFinished : false,
-            Decision : String,
+            Decision : '',
+            selectedPokemon : []
         }
     },
 
@@ -66,28 +68,60 @@ methods: {
 
   startGame(){
     this.Init()
-
+    
+    this.Shuffle()
+    
+    this.ChargerJeu = true
+    
     this.HideAll()
     
     setInterval (()=>{
       this.Timer()
     },1000)
+  
   },
 
-    Init(){ //Trouver un moyen d'utiliser Array.prot.splice()
+    Init(){
 
-      for(let i = 0; i<this.Jeu; i++){
-        this.game.push(i)
-      }
+    fetch(`https://pokeapi.co/api/v2/pokemon/?offset=${Math.floor((Math.random() * 10) + 1)}&limit=${this.Jeu}`)
+                .then(res => res.json())
+                .then(finalRes => {       
+                    const pokemons = finalRes.results.map(pokemon => fetch(pokemon.url).then(res=> res.json()))
+                    Promise.all(pokemons)
+                })
+                .then(finalRes2 => {
+                    const Pokemon = {}
+                    Pokemon.Nom = finalRes2.name
+                    Pokemon.ImGSrc = finalRes2.sprites.front_default
+                    Pokemon.ImgArtwork = finalRes2.sprites.other["official-artwork"].front_default
+                    Pokemon.id = finalRes2.id 
+                    this.game.push(Pokemon)
+                    this.game.push(Pokemon)           
+    })
+},
 
-      this.game.forEach((elem)=>{
-        this.game.push(elem)
-      })
+  Shuffle(){
+    console.log("Entree dans le shuffle")
+       for(let i=0;i<(this.Jeu);i++){
+              let rdn_choice
+              do {
+                rdn_choice = this.getRandomInt(0,10);
+            } while(this.selectedPokemon.includes(rdn_choice));
+              this.selectedPokemon[i] = rdn_choice
+          }
 
-      this.game.sort(()=> Math.random() - 0.5)
- 
-      this.ChargerJeu = true
-    },
+          console.log(this.selectedPokemon)
+          for(let i=0;i<this.Jeu; i++) {
+            this.selectedPokemon[i+this.Jeu]=this.selectedPokemon[i];
+        }
+
+  },
+
+  getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min) + min);
+  },
 
       getCardId(){
       this.game.forEach((Elem) =>{
@@ -98,35 +132,39 @@ methods: {
     HideAll(){
         setTimeout(() => {
           this.getCardId()
-          this.game = this.game.map(()=> 11)
+          const Pokeball = {
+            ImGSrc : "Pokeball.png"
+          }
+          this.game = this.game.map(()=> Pokeball)
         },this.Tps_Memo*1000);
-      console.log("Temps de mem : "+this.Tps_Memo)
       },
 
     GestionChoix(data){
-      
       this.Carte_Selec++
-      this.nbclick++
+      
       console.log("Nb clicks : "+this.$data.nbclick)
       if(this.Carte_Selec == 1){
         this.Premier_choix = data.card
       }
-      else {
+      else if(this.Carte_Selec == 2){
         this.Deuxieme_choix = data.card
-        this.Carte_Selec = 0
-      }
-    
-      if(this.Premier_choix !== this.Deuxieme_choix && this.nbclick>1){
-        this.Vies--
-        this.Decision = "Mauvais"
-        this.nbclick = 0  
+        
       }
 
+    while(this.Carte_Selec == 2){
+      
       if(this.Premier_choix == this.Deuxieme_choix){
-        this.nbclick
         this.Paires++
-        this.Paires_trouve.push(this.Premier_choix,this.Deuxieme_choix)
+        this.Paires_trouve.push(this.Premier_choix)
+        //this.PokemonCry(data.card.id)
       }
+      else if(this.Premier_choix !== this.Deuxieme_choix){
+        this.Vies--
+        this.Decision = "Mauvais"
+        console.log("Decision prise "+this.Decision) 
+      }
+      this.Carte_Selec = 0
+    }
 
       if(this.Paires == 3){//this.Jeu - 1){
         this.Victoire = true
@@ -139,7 +177,13 @@ methods: {
         window.alert('Vous avez épuisé toutes vos tentatives.')
         location.reload()
       }
+
     },
+
+    PokemonCry(id){           
+                 var audio = new Audio(`v4/src/Audio/Cri_00${id}_DP.ogg`)     
+                audio.play()
+            },
 
     Timer(){
       this.horloge -- 
@@ -152,7 +196,7 @@ methods: {
     Restart(){
       location.reload()
     }
-}
+  } 
 }
 </script>
 
