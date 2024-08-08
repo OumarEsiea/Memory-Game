@@ -1,9 +1,7 @@
 <template>
-  <Transition name="list">
-    <li v-if="card != null" class="flex-item">
+    <li class="flex-item">
       <img :src="card.ImGSrc" v-on:click="IdChange()">                      
     </li>
-  </Transition>  
 </template>
 
 <script>
@@ -31,34 +29,15 @@ choix : {type : String, default: "" }
         this.click++
         this.card = this.imageId
         this.$emit('VerifChoix', this.Choix ={"choix" : this.click, "card" : this.imageId})
+        console.log("Envoi du choix"+this.Choix)
         }
         if (this.choix == 'Mauvais'){
             console.log("Reception du choix : "+this.choix)
             setTimeout(()=>{
                 this.card = this.Pokeball},
-                2000)
+                1000)
         }
     }
     }
 }
 </script>
-
-<style>
-
-.list-move,
-.list-enter-active,
-.list-leave-active {
-  transition: all 0.5s ease;
-}
-
-.list-enter-from,
-.list-leave-to {
-  opacity: 0;
-  transform: translateX(30px);
-}
-
-.list-leave-active {
-  position: absolute;
-}
-
-</style>

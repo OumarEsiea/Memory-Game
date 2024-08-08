@@ -27,10 +27,12 @@
                       <li><button :disabled="isTrue == true" v-on:click="startGame()">Play</button></li>
                       <li><button v-on:click="Restart()">Restart</button></li>       
                   </ul>
-                  <ul class="flex-container" v-if="ChargerJeu">
+                  <div class="flex-container" v-if="ChargerJeu">
+                    <TransitionGroup name="list" tag="ul">
                       <GameCard v-for="(Image,Indice) in game" :key="Image" :cardId="Image" :imageId="Indice_Previous[Indice]" 
-                      @VerifChoix="GestionChoix" :choix="Decision"/>
-                  </ul>
+                       @VerifChoix="GestionChoix" :choix="Decision"/>
+                    </TransitionGroup>  
+                  </div>
               </div>
   </template>
 
@@ -44,6 +46,22 @@
         Temps : Number,
       },
       components: {GameCard},
+
+      watch: {
+    Taille(newValue) {
+      this.Jeu = newValue;
+      this.$emit('update:Taille', newValue);
+    },
+    Memo(newValue) {
+      this.Tps_Memo = newValue;
+      this.$emit('update:Memo', newValue); 
+    },
+    Temps(newValue) {
+      this.horloge = newValue;
+      this.$emit('update:Temps', newValue);
+    }
+  },
+
       data() {
           return {
               Jeu : this.Taille,
@@ -91,7 +109,6 @@
                       .then(res=> res.json()
                       .then(finalRes2 => {
                       const Pokemon = {}
-                      console.log("FinaleRes : "+finalRes2)
                       Pokemon.Nom = finalRes2.name
                       Pokemon.ImGSrc = finalRes2.sprites.front_default
                       Pokemon.ImgArtwork = finalRes2.sprites.other["official-artwork"].front_default
@@ -100,13 +117,11 @@
                       this.game.push(Pokemon)           
                         })
                      ))
-                      console.log(pokemons)
                     Promise.all(pokemons)
                   })
   },
 
     Shuffle(){
-      //console.log("Entree dans le shuffle")
       for (let i = this.game.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         ([this.game[i], this.game[j]] = [this.game[j], this.game[i]]);
@@ -129,48 +144,42 @@
           },this.Tps_Memo*1000);
         },
 
-      GestionChoix(data){
-        this.Carte_Selec++
-        
-        //console.log("Nb clicks : "+this.$data.nbclick)
-        if(this.Carte_Selec == 1){
-          this.Premier_choix = data.card
-        }
-        else if(this.Carte_Selec == 2){
-          this.Deuxieme_choix = data.card
-          
-        }
+        GestionChoix(data) {
+   this.Carte_Selec++;
 
-      while(this.Carte_Selec == 2){
-        
-        if(this.Premier_choix == this.Deuxieme_choix){
-          this.Paires++
+   if (this.Carte_Selec == 1) {
+      this.Premier_choix = data.card;
+   } else if (this.Carte_Selec == 2) {
+      this.Deuxieme_choix = data.card;
+   }
 
-          this.TmpTrouve.push(this.Premier_choix)
-          
-        }
-        else if(this.Premier_choix !== this.Deuxieme_choix){
-          this.Vies--
-          this.Decision = "Mauvais"
-          //console.log("Decision prise "+this.Decision) 
-        }
-        this.Carte_Selec = 0
+   if (this.Carte_Selec == 2) {
+      if (this.Premier_choix == this.Deuxieme_choix) {
+         this.Paires++;
+         this.TmpTrouve.push(this.Premier_choix);
+      } else {
+         this.Vies--;
+         this.Decision = "Mauvais";
+         console.log("Decision prise " + this.Decision);
       }
+      this.Carte_Selec = 0;
+      console.log('Sortie de la boucle');
+   }
 
-        if(this.Paires == 3){//this.Jeu - 1){
-          this.PartieFinished = true
-          this.Victoire = true
-          this.AfficherPairesTrouvees()
-        }
+   // Vérification des conditions de victoire ou défaite
+   if (this.Paires == 3) {
+      this.PartieFinished = true;
+      this.Victoire = true;
+      this.AfficherPairesTrouvees();
+   }
 
-        if(this.Vies == 0){
-          this.PartieFinished = true
-          this.Victoire = false
-          window.alert('Vous avez épuisé toutes vos tentatives.')
-          location.reload()
-        }
-
-      },
+   if (this.Vies == 0) {
+      this.PartieFinished = true;
+      this.Victoire = false;
+      window.alert('Vous avez épuisé toutes vos tentatives.');
+      location.reload();
+   }
+},
 
       AfficherPairesTrouvees() {
     this.TmpTrouve.forEach((paire, index) => {
@@ -204,6 +213,22 @@
         margin: 20px;
         cursor: pointer;
   }
+
+  .list-move,
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
+}
+
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+.list-leave-active {
+  position: absolute;
+}
 
 @keyframes rubberband {
   from{
