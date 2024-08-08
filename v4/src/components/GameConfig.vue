@@ -24,7 +24,7 @@
        data (){
         return {
             Taille_Jeu : 5,
-            Tps_Memo : 30,
+            Tps_Memo : 20,
             TpsJeu : 60
         }
        },

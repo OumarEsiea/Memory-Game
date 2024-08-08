@@ -1,6 +1,9 @@
 <template>
-<li class="flex-item"><img :src="card.ImGSrc" v-on:click="IdChange()">                      
-</li>
+  <Transition name="list">
+    <li v-if="card != null" class="flex-item">
+      <img :src="card.ImGSrc" v-on:click="IdChange()">                      
+    </li>
+  </Transition>  
 </template>
 
 <script>
@@ -39,3 +42,23 @@ choix : {type : String, default: "" }
     }
 }
 </script>
+
+<style>
+
+.list-move,
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
+}
+
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+.list-leave-active {
+  position: absolute;
+}
+
+</style>
