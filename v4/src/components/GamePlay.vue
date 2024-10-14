@@ -15,7 +15,8 @@
                       <br> Paires trouvées</span>
                         <TransitionGroup tag="ul" name="rubberband">
                           <li v-for="Paires in Paires_trouve" :key="Paires.id">
-                            <img :src="Paires.ImGSrc">
+                            {{ Paires.Nom }}
+                              <img :src="Paires.ImGSrc" @load="PokemonCry(Paires)">
                           </li>
                         </TransitionGroup>
                    </div>
@@ -115,6 +116,7 @@
                       Pokemon.id = finalRes2.id 
                       this.game.push(Pokemon)
                       this.game.push(Pokemon)           
+                      console.log(Pokemon)
                         })
                      ))
                     Promise.all(pokemons)
@@ -185,9 +187,20 @@
     this.TmpTrouve.forEach((paire, index) => {
       setTimeout(() => {
         this.Paires_trouve.push(paire)
-      }, index * 500)
+      }, index * 2000)
     })
   },
+
+  PokemonCry(pokemon){                      
+   
+    const audiourl = require(`@/assets/Audio/Cri_00${pokemon.id}_DP.ogg`)
+               
+    const audio = new Audio(audiourl)
+
+    audio.play().catch(error => {
+        console.error('Error playing audio:', error);
+      })
+            },
 
       Timer(){
         this.horloge -- 
